@@ -30,13 +30,13 @@ FROM < image name >
 
 其他常用的实现自动化的命令还包括：
 
-1. `MAINTAINER`，用于设置镜像的作者
+1.`MAINTAINER`，用于设置镜像的作者
 
 {% highlight ruby %}
 MAINTAINER < author name >
 {% endhighlight %}
 
-2. `RUN`，用于执行shell或exec环境下的命令。
+2.`RUN`，用于执行shell或exec环境下的命令。
 
 RUN会在新创建的镜像上添加新的只读层。
 
@@ -44,7 +44,7 @@ RUN会在新创建的镜像上添加新的只读层。
 RUN < command >
 {% endhighlight %}
 
-3. `ADD`，用于复制文件。
+3.`ADD`，用于复制文件。
 
 {% highlight ruby %}
 ADD < src > < dest >
@@ -52,7 +52,7 @@ ADD < src > < dest >
 
 src可以是URL或者启动配置上下文中的一个文件，dest是容器内的路径。
 
-4. `CMD`，容器默认会执行的命令。
+4.`CMD`，容器默认会执行的命令。
 
 Dockerfile只允许使用一次CMD指令，如果有多个CMD指令存在，则只有最后一个是有效的。CMD有三种形式：
 
@@ -62,13 +62,13 @@ CMD ["para1","para2"]
 CMD command para1 para2
 {% endhighlight %}
 
-5. `EXPOSE`，指定容器运行时监听的端口。
+5.`EXPOSE`，指定容器运行时监听的端口。
 
 {% highlight ruby %}
 EXPOSE < port >
 {% endhighlight %}
 
-6. `ENTRYPOINT`，给容器配置一个可执行命令。这样一来，每次使用镜像创建容器时，可以设置一个特定的应用程序为默认程序。同时，该镜像每次被调用时也只能运行这个指定的应用程序。
+6.`ENTRYPOINT`，给容器配置一个可执行命令。这样一来，每次使用镜像创建容器时，可以设置一个特定的应用程序为默认程序。同时，该镜像每次被调用时也只能运行这个指定的应用程序。
 
 Docker只允许有一个ENTRYPOINT。如果有多个存在，只有最后一个有效。
 
@@ -77,25 +77,25 @@ ENTRYPOINT ["executable","para1","para2"]
 ENTRYPOINT command para1 para2
 {% endhighlight %}
 
-7. `WORKDIR`，指定`RUN`、`CMD`与`ENTRYPOINT`命令的工作目录。
+7.`WORKDIR`，指定`RUN`、`CMD`与`ENTRYPOINT`命令的工作目录。
 
 {% highlight ruby %}
 WORKDIR /path/to/workdir
 {% endhighlight %}
 
-8. `ENV`，用于设置环境变量。
+8.`ENV`，用于设置环境变量。
 
 {% highlight ruby %}
 ENV < key > < value >
 {% endhighlight %}
 
-9. `USER`，设置容器运行时的UID。
+9.`USER`，设置容器运行时的UID。
 
 {% highlight ruby %}
 USER < uid >
 {% endhighlight %}
 
-10. `VOLUME`，授权容器访问主机上的目录。
+10.`VOLUME`，授权容器访问主机上的目录。
 
 {% highlight ruby %}
 VOLUME ["/data"]
