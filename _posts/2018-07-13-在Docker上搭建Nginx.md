@@ -9,9 +9,11 @@ date: 2018-07-14 17:50:24.000000000 +08:00
 **1.在主目录下创建nginx目录及3个子目录：**
 
 {% highlight ruby %}
+'''
 ryan@ryan-VirtualBox:~/nginx$ mkdir -p ./www ./conf ./log
 ryan@ryan-VirtualBox:~/nginx$ ls
 conf  log  www
+'''
 {% endhighlight %}
 
 其中，www目录将映射为nginx容器配置的虚拟目录，conf目录里的配置文件将映射为nginx容器的配置文件，log目录将映射为nginx容器的日志目录。
@@ -19,6 +21,7 @@ conf  log  www
 **2.在conf目录下添加nginx.conf文件，填入如下内容：**
 
 {% highlight ruby %}
+'''
 user www-data;
 worker_processes auto;
 pid /run/nginx.pid;
@@ -91,11 +94,13 @@ http {
 
     }
 }
+'''
 {% endhighlight %}
 
 **3.在www目录下添加index.html文件，填入以下内容：**
 
 {% highlight ruby %}
+'''
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,11 +110,13 @@ http {
 <h2>Hello docker nginx</h1>
 </body>
 </html>
+'''
 {% endhighlight %}
 
 **4.在log目录下创建两个空日志文件access.log和error.log。这时的nginx目录应该是这样：**
 
 {% highlight ruby %}
+'''
 ryan@ryan-VirtualBox:~/nginx$ tree
 .
 ├── conf
@@ -119,11 +126,13 @@ ryan@ryan-VirtualBox:~/nginx$ tree
 │   └── error.log
 └── www
     └── index.html
+'''
 {% endhighlight %}
 
 **5.查找Docker Hub上的nginx镜像：**
 
 {% highlight ruby %}
+'''
 ryan@ryan-VirtualBox:~/nginx$ docker search nginx
 NAME                                                   DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
 nginx                                                  Official build of Nginx.                        9017                [OK]                
@@ -151,29 +160,36 @@ toccoag/openshift-nginx                                Nginx reverse proxy for N
 travix/nginx                                           NGinx reverse proxy                             1                                       [OK]
 ansibleplaybookbundle/nginx-apb                        An APB to deploy NGINX                          0                                       [OK]
 mailu/nginx                                            Mailu nginx frontend                            0                                       [OK]
+'''
 {% endhighlight %}
 
 **6.直接下载官方镜像：**
 
 {% highlight ruby %}
+'''
 ryan@ryan-VirtualBox:~/nginx$ docker pull nginx
+'''
 {% endhighlight %}
 
 下载完成后，可以通过命令查看名为nginx的镜像：
 
 {% highlight ruby %}
+'''
 ryan@ryan-VirtualBox:~/nginx$ docker images 
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 nginx               latest              3c5a05123222        7 days ago          109MB
 ubuntu              latest              113a43faa138        5 weeks ago         81.2MB
 hello-world         latest              e38bc07ac18e        3 months ago        1.85kB
+'''
 {% endhighlight %}
 
 **7.运行容器**
 
 {% highlight ruby %}
+'''
 ryan@ryan-VirtualBox:~/nginx$ docker run -p 8093:80 --name mnginx  -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/www:/opt/nginx/www -v $PWD/log:/opt/nginx/log  -d nginx
 aaed799efdadecb81d21079dc05b8b8a03d8bf8c38ab532e4886a872f6692e94
+'''
 {% endhighlight %}
 
 命令说明：
@@ -189,9 +205,11 @@ aaed799efdadecb81d21079dc05b8b8a03d8bf8c38ab532e4886a872f6692e94
 **8.查看容器运行情况**
 
 {% highlight ruby %}
+'''
 ryan@ryan-VirtualBox:~/nginx$ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
 aaed799efdad        nginx               "nginx -g 'daemon of…"   4 seconds ago       Up 3 seconds        0.0.0.0:8093->80/tcp   mnginx
+'''
 {% endhighlight %}
 
 9.通过浏览器访问nginx
