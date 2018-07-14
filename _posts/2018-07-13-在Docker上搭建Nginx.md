@@ -8,13 +8,11 @@ date: 2018-07-14 17:50:24.000000000 +08:00
 
 **1.在主目录下创建nginx目录及3个子目录：**
 
-{% highlight ruby %}
 '''
 ryan@ryan-VirtualBox:~/nginx$ mkdir -p ./www ./conf ./log
 ryan@ryan-VirtualBox:~/nginx$ ls
 conf  log  www
 '''
-{% endhighlight %}
 
 其中，www目录将映射为nginx容器配置的虚拟目录，conf目录里的配置文件将映射为nginx容器的配置文件，log目录将映射为nginx容器的日志目录。
 
