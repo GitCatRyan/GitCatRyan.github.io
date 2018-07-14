@@ -1,12 +1,12 @@
 ---
 layout: post
 title: 利用Docker在ubuntu上安装Nginx
-date: 2018-07-14 18:00:24.000000000 +08:00
+date: 2018-07-14 17:50:24.000000000 +08:00
 ---
 
 对于许多常用的开源工具，docker hub里已经有做好的镜像，可以直接拿来用，对于新手尤其方便有效。本文以在ubuntu上采用docker安装nginx为例进行说明。
 
-1.在主目录下创建nginx目录及3个子目录：
+**1.在主目录下创建nginx目录及3个子目录：**
 
 {% highlight ruby %}
 ryan@ryan-VirtualBox:~/nginx$ mkdir -p ./www ./conf ./log
@@ -16,7 +16,7 @@ conf  log  www
 
 其中，www目录将映射为nginx容器配置的虚拟目录，conf目录里的配置文件将映射为nginx容器的配置文件，log目录将映射为nginx容器的日志目录。
 
-2.在conf目录下添加nginx.conf文件，填入如下内容：
+**2.在conf目录下添加nginx.conf文件，填入如下内容：**
 
 {% highlight ruby %}
 user www-data;
@@ -93,7 +93,7 @@ http {
 }
 {% endhighlight %}
 
-3.在www目录下添加index.html文件，填入以下内容：
+**3.在www目录下添加index.html文件，填入以下内容：**
 
 {% highlight ruby %}
 <!DOCTYPE html>
@@ -107,7 +107,7 @@ http {
 </html>
 {% endhighlight %}
 
-4.在log目录下创建两个空日志文件access.log和error.log。这时的nginx目录应该是这样：
+**4.在log目录下创建两个空日志文件access.log和error.log。这时的nginx目录应该是这样：**
 
 {% highlight ruby %}
 ryan@ryan-VirtualBox:~/nginx$ tree
@@ -121,7 +121,7 @@ ryan@ryan-VirtualBox:~/nginx$ tree
     └── index.html
 {% endhighlight %}
 
-5.查找Docker Hub上的nginx镜像：
+**5.查找Docker Hub上的nginx镜像：**
 
 {% highlight ruby %}
 ryan@ryan-VirtualBox:~/nginx$ docker search nginx
@@ -153,7 +153,7 @@ ansibleplaybookbundle/nginx-apb                        An APB to deploy NGINX   
 mailu/nginx                                            Mailu nginx frontend                            0                                       [OK]
 {% endhighlight %}
 
-6.直接下载官方镜像：
+**6.直接下载官方镜像：**
 
 {% highlight ruby %}
 ryan@ryan-VirtualBox:~/nginx$ docker pull nginx
@@ -169,7 +169,7 @@ ubuntu              latest              113a43faa138        5 weeks ago         
 hello-world         latest              e38bc07ac18e        3 months ago        1.85kB
 {% endhighlight %}
 
-7.运行容器
+**7.运行容器**
 
 {% highlight ruby %}
 ryan@ryan-VirtualBox:~/nginx$ docker run -p 8093:80 --name mnginx  -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/www:/opt/nginx/www -v $PWD/log:/opt/nginx/log  -d nginx
@@ -186,7 +186,7 @@ aaed799efdadecb81d21079dc05b8b8a03d8bf8c38ab532e4886a872f6692e94
 
 **注意，这里选择的挂载到的容器中的目录，要与nginx.conf中指定的access.log、error.log和root目录对应，否则会出现运行容器后，容器找不到相应目录的情况，导致运行失败**
 
-8.查看容器运行情况
+**8.查看容器运行情况**
 
 {% highlight ruby %}
 ryan@ryan-VirtualBox:~/nginx$ docker ps
@@ -196,3 +196,4 @@ aaed799efdad        nginx               "nginx -g 'daemon of…"   4 seconds ago
 
 9.通过浏览器访问nginx
 
+![Alt text](https://github.com/GitCatRyan/gitcatryan.github.io/raw/master/assets/images/nginx.png)
