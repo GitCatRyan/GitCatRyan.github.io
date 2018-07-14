@@ -8,113 +8,101 @@ date: 2018-07-14 17:50:24.000000000 +08:00
 
 **1.在主目录下创建nginx目录及3个子目录：**
 
-` ` ` 
-ryan@ryan-VirtualBox:~/nginx$ mkdir -p ./www ./conf ./log \n
-ryan@ryan-VirtualBox:~/nginx$ ls \n
-conf  log  www \n
-` ` ` 
+    ryan@ryan-VirtualBox:~/nginx$ mkdir -p ./www ./conf ./log
+    ryan@ryan-VirtualBox:~/nginx$ ls
+    conf  log  www \n
 
 其中，www目录将映射为nginx容器配置的虚拟目录，conf目录里的配置文件将映射为nginx容器的配置文件，log目录将映射为nginx容器的日志目录。
 
 **2.在conf目录下添加nginx.conf文件，填入如下内容：**
 
-{% highlight ruby %}
-'''
-user www-data;
-worker_processes auto;
-pid /run/nginx.pid;
+    user www-data;
+    worker_processes auto;
+    pid /run/nginx.pid;
 
-events {
-    worker_connections 768;
-    # multi_accept on;
-}
-
-http {
-
-    ##
-    # Basic Settings
-    ##
-
-    sendfile on;
-    tcp_nopush on;
-    tcp_nodelay on;
-    keepalive_timeout 65;
-    types_hash_max_size 2048;
-    # server_tokens off;
-
-    # server_names_hash_bucket_size 64;
-    # server_name_in_redirect off;
-
-    include /etc/nginx/mime.types;
-    default_type application/octet-stream;
-
-    ##
-    # SSL Settings
-    ##
-
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
-    ssl_prefer_server_ciphers on;
-
-    ##
-    # Logging Settings
-    ##
-
-    access_log /opt/nginx/log/access.log;
-    error_log /opt/nginx/log/error.log;
-
-    ##
-    # Gzip Settings
-    ##
-
-    gzip on;
-    gzip_disable "msie6";
-
-    ##
-    # Virtual Host Configs
-    ##
-
-    server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-
-        root /opt/nginx/www;
-
-        # Add index.php to the list if you are using PHP
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name _;
-
-        location / {
-            # First attempt to serve request as file, then
-            # as directory, then fall back to displaying a 404.
-            try_files $uri $uri/ =404;
-        }
-
+    events {
+        worker_connections 768;
+        # multi_accept on;
     }
-}
-'''
-{% endhighlight %}
+
+    http {
+
+        ##
+        # Basic Settings
+        ##
+
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        # server_tokens off;
+
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+    
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        ##
+        # SSL Settings
+        ##
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+        ssl_prefer_server_ciphers on;
+
+        ##
+        # Logging Settings
+        ##
+
+        access_log /opt/nginx/log/access.log;
+        error_log /opt/nginx/log/error.log;
+
+        ##
+        # Gzip Settings
+        ##
+
+        gzip on;
+        gzip_disable "msie6";
+
+        ##
+        # Virtual Host Configs
+        ##
+
+        server {
+            listen 80 default_server;
+            listen [::]:80 default_server;
+
+            root /opt/nginx/www;
+
+            # Add index.php to the list if you are using PHP
+            index index.html index.htm index.nginx-debian.html;
+
+            server_name _;
+
+            location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+            }
+
+        }
+    }
 
 **3.在www目录下添加index.html文件，填入以下内容：**
 
-{% highlight ruby %}
-'''
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-</head>
-<body>
-<h2>Hello docker nginx</h1>
-</body>
-</html>
-'''
-{% endhighlight %}
+    <!DOCTYPE html>
+        <html>
+            <head>
+                <title>Welcome to nginx!</title>
+            </head>
+            <body>
+                <h2>Hello docker nginx</h1>
+            </body>
+        </html>
 
 **4.在log目录下创建两个空日志文件access.log和error.log。这时的nginx目录应该是这样：**
 
-{% highlight ruby %}
-'''
 ryan@ryan-VirtualBox:~/nginx$ tree
 .
 ├── conf
