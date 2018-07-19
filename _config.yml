@@ -5,6 +5,8 @@ subtitle: Ryan的区块链开发学习基地
 description: 100天，和一群人一起突破自己。
 creator: <a href="http://onev.cat">@onevcat</a>
 
+encoding: utf-8
+
 url: "http://vno.onevcat.com"
 
 permalink: /:year/:month/:title/
