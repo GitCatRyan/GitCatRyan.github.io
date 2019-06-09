@@ -1,8 +1,8 @@
 # Basic
-title: GitCatRyan
-subtitle: Ryan的区块链开发学习基地
+title: Ryanzhu630
+subtitle: 一个Python小白的自学之路
 # welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
-description: 100天，和一群人一起突破自己。
+description: 人生苦短  我用Python
 creator: <a href="http://onev.cat">@onevcat</a>
 
 encoding: utf-8
@@ -39,9 +39,8 @@ paginate_path: "page/:num/"
     
 # Social
 social:
-    wechat: Ryan_pig
-    github: GitCatRyan
-    mail: ryanztm@126.com
+    github: https://github.com/RyanZhu630
+    mail: ryanzhu630@gmail.com
 
 # Google Analytics
 ga:
