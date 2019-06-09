@@ -39,7 +39,7 @@ paginate_path: "page/:num/"
     
 # Social
 social:
-    github: https://github.com/RyanZhu630
+    github: RyanZhu630
     mail: ryanzhu630@gmail.com
 
 # Google Analytics
